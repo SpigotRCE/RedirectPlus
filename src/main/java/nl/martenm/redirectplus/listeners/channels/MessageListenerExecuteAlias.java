@@ -27,6 +27,9 @@ public class MessageListenerExecuteAlias implements Listener {
     public void messageReceived(PluginMessageEvent event) {
         if(!event.getTag().equalsIgnoreCase(RedirectPlus.CHANNEL_NAME)) return;
 
+        // Let's not smuggle the message to the respective receiver
+        event.setCancelled(true);
+
         ByteArrayDataInput in = ByteStreams.newDataInput(event.getData());
         String subChannel = in.readUTF();
 
